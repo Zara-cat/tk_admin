@@ -2,13 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--继承父-->
     <parent>
         <groupId>com.tk</groupId>
         <artifactId>tkadmin</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-
+    <!--本模块简介-->
     <groupId>com.tk</groupId>
     <artifactId>tkadmin-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -19,6 +20,8 @@
     <properties>
 
     </properties>
+
+    <!--导入依赖  如若父文件中声明了某个jar包版本，这里直接导入，不需要写版本号-->
     <dependencies>
         <!--引入公共模块-->
         <dependency>
@@ -26,6 +29,7 @@
             <artifactId>tkadmin-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
 
 </project>

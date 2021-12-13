@@ -1,5 +1,6 @@
-package com.tk.config.ymlbean;
+package com.tk.config;
 
+import com.tk.config.swagger.bean.SwaggerInfo;
 import com.tk.config.ymlbean.login.LoginProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +19,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigYMLBeanConfiguration {
 
+    /**
+     * login
+     * @return
+     */
     @Bean
     @ConfigurationProperties(prefix = "login")
     //实体和yml文件映射，prefix指定前缀为login的
     public LoginProperties loginProperties(){
         return new LoginProperties();
+    }
+
+    /**
+     * swagger
+     * @return
+     */
+    @Bean
+    @ConfigurationProperties(prefix = "swagger")
+    public SwaggerInfo swaggerInfo(){
+        return new SwaggerInfo();
     }
 
 }
