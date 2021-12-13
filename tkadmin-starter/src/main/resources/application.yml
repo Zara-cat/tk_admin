@@ -1,0 +1,15 @@
+# 应用名称
+server:
+  port: 8080
+login:
+  # 登录验证码
+  login-code:
+    code-type: arithmetic
+    expiration: 2
+    width: 111
+    height: 36
+    length: 2
+    font-name:
+    font-size: 25
+
+

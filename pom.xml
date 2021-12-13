@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--注意：抽取统一的配置信息和依赖版本控制，这样可以方便子 pom 直接引用，简化子 pom 的配置。-->
+    <!--多模块项目中，父模块打包类型必须是pom-->
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tk</groupId>
+    <artifactId>tkadmin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <!---->
+    <packaging>pom</packaging>
+
+    <!-- parent指明继承关系，给出被继承的父项目的具体信息-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.11.RELEASE</version>
+    </parent>
+
+
+    <name>TK-ADMIN 管理后台</name>
+    <description>The parent module</description>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <druid.version>1.1.24</druid.version>
+    </properties>
+
+    <!-- 模块说明：这里声明多个子模块 -->
+    <modules>
+        <module>tkadmin-common</module>
+        <module>tkadmin-system</module>
+        <module>tkadmin-logging</module>
+        <module>tkadmin-generator</module>
+        <module>tkadmin-tools</module>
+        <module>tkadmin-starter</module>
+    </modules>
+
+    <dependencies>
+        <!--Spring boot Web容器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--Spring boot 测试-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!--lombok插件-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+</project>

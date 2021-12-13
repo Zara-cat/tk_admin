@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.tk</groupId>
+        <artifactId>tkadmin</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.tk</groupId>
+    <artifactId>tkadmin-starter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>启动类</name>
+    <description>Demo project for Spring Boot</description>
+    <!-- 打包类型 -->
+    <packaging>war</packaging>
+
+    <properties>
+
+    </properties>
+
+    <dependencies>
+        <!--导入核心模块（内包含common模块）-->
+        <dependency>
+            <groupId>com.tk</groupId>
+            <artifactId>tkadmin-system</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>admin</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>    <!--默认关掉单元测试 -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
