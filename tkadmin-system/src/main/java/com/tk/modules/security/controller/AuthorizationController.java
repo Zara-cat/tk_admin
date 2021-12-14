@@ -1,11 +1,11 @@
 package com.tk.modules.security.controller;
 
+import com.tk.modules.security.dto.AuthUserDTO;
 import com.tk.utils.response.ResultDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : [Zara-cat]
@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthorizationController {
 
     @ApiOperation(value = "登录授权")
-    @GetMapping(value = {"/login"})
-    public ResultDTO<Object> login(){
+    @PostMapping(value = {"/login"})
+    public ResultDTO<Object> login(@Validated @RequestBody AuthUserDTO userDTO){
         System.out.println("lall");
         return null;
     }
