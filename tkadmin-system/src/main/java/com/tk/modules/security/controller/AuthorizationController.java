@@ -25,7 +25,7 @@ public class AuthorizationController {
     @ApiOperation(value = "登录授权")
     @PostMapping(value = {"/login"})
     public ResultDTO<Object> login(@Validated @RequestBody AuthUserDTO userDTO){
-        System.out.println("lall");
+        System.out.println(userDTO.toString());
         return null;
     }
 }
