@@ -9,7 +9,7 @@
     <groupId>com.tk</groupId>
     <artifactId>tkadmin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <!---->
+    <!--必须为pom-->
     <packaging>pom</packaging>
 
     <!-- parent指明继承关系，给出被继承的父项目的具体信息-->
@@ -33,6 +33,18 @@
         <hutool.version>5.3.4</hutool.version>
         <!--alibaba JSON 工具-->
         <fastjson.version>1.2.78</fastjson.version>
+        <!--easy-captcha 验证码-->
+        <easy-captcha.version>1.6.2</easy-captcha.version>
+        <!--commons-lang3-->
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <!--shiro -->
+        <shiro.version>1.5.3</shiro.version>
+        <!--jwt -->
+        <jwt.version>3.4.1</jwt.version>
+        <!--mysql-->
+        <mysql.version>8.0.11</mysql.version>
+        <!--druid-->
+        <druid.version>1.1.22</druid.version>
     </properties>
 
     <!-- 模块说明：这里声明多个子模块 -->
@@ -47,7 +59,6 @@
 
     <!--控制子模块版本-->
     <dependencyManagement>
-
         <dependencies>
             <!--工具包-->
             <dependency>
@@ -71,6 +82,35 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <!-- easy-captcha  验证码-->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+            <!--shiro-->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <!-- JWT -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <!--MySQL的JDBC驱动包 8.0以上-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -101,6 +141,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+
+        <!-- apache commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <!--redis 起步依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 </project>

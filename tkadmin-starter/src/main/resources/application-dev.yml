@@ -1,8 +1,42 @@
-
+#数据源
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+    # 初始化大小，最小，最大
+    druid:
+      #JDBC配置
+      url: jdbc:mysql://localhost:3306/tkadmin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useSSL=false
+      username: root
+      password: 1111
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      #filters: stat,wall,log4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
 # 登录相关配置
 login:
   #  验证码
   login-code:
+    # uuid 前缀
+    code-key-prefix: code-key-
     #  验证码类型配置 查看 LoginProperties 类
     code-type: arithmetic
     #  登录图形验证码有效时间/分钟
@@ -20,9 +54,23 @@ login:
 
 # 配置swagger
 swagger:
-  version: 1.0v
+  version: 1.0
   groupName: 基础项目
   title: tk—admin 接口文档
   description: 接口文档
   # 扫描的包路径
   basePackage: com.tk
+
+# JwtToken相关
+jwt:
+  # 请求头key
+  access-authHeader: X-Authorization-With
+  # redis 中的refreshToken ，若为空 ，则使用 JwtYmlBean 中的默认
+  refresh-token-prefix: RefreshToken-
+  # redis 中的 refreshToken 的有效时间 ，若为空 ，则使用 JwtYmlBean 中的默认,此处单位/秒
+  refresh-token-time: 3601
+  # accessToken 的 有效时间，默认 5 分钟，此处单位/毫秒
+  access-token-expireTime: 300000
+  # accessToken 私钥，若为空 ，则使用 JwtYmlBean 中的默认
+  access-token-secret: SECRET_VALUE
+

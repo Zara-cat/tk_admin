@@ -11,7 +11,7 @@
     <groupId>com.tk</groupId>
     <artifactId>tkadmin-tools</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>工具模块</name>
+    <name>模块</name>
     <description>tkadmin-tools</description>
 
     <properties>

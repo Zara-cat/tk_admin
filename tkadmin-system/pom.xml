@@ -29,7 +29,16 @@
             <artifactId>tkadmin-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--数据源-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -20,7 +20,6 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class LoginProperties {
-
     /**
      * 账户单用户 登录
      */
@@ -41,4 +40,6 @@ public class LoginProperties {
     public boolean isCacheEnable() {
         return cacheEnable;
     }
+
+
 }

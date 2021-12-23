@@ -21,6 +21,10 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class LoginCode {
     /**
+     * 验证码code前缀
+     */
+    private String codeKeyPrefix;
+    /**
      * 验证码配置
      */
     private LoginCodeEnum codeType;

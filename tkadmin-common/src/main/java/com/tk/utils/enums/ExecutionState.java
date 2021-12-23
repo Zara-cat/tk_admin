@@ -48,6 +48,8 @@ public enum ExecutionState {
     USER_LOCKED(2011,"该账户已被锁定，如需解锁请联系管理员！"),
     USER_AUTHENTICATION_FAIL(2012,"登录异常，请联系管理员！"),
     USER_LOGOUTTED(2013,"用户已经退出，请先登录"),
+    USER_NO_LOGINCODE(2014,"验证码不存在或已过期"),
+    USER_LOGINCODE_FAIL(2015,"验证码错误"),
 
     /**
      * 系统错误

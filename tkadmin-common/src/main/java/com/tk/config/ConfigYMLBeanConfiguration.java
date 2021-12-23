@@ -1,6 +1,7 @@
 package com.tk.config;
 
 import com.tk.config.swagger.bean.SwaggerInfo;
+import com.tk.config.ymlbean.jwt.JwtYmlBean;
 import com.tk.config.ymlbean.login.LoginProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class ConfigYMLBeanConfiguration {
 
     /**
-     * login
+     * login about
      * @return
      */
     @Bean
@@ -40,4 +41,13 @@ public class ConfigYMLBeanConfiguration {
         return new SwaggerInfo();
     }
 
+    /**
+     * jwtToken about
+     * @return
+     */
+    @Bean
+    @ConfigurationProperties(prefix = "jwt")
+    public JwtYmlBean securityProperties() {
+        return new JwtYmlBean();
+    }
 }

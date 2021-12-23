@@ -34,7 +34,6 @@ import java.util.Collection;
 @Configuration  //让Spring来加载该类配置
 @EnableSwagger2 //开启swagger
 @Profile({"dev", "test"}) //表明swagger只能使用在dev test 也就是开发和测试阶段
-
 public class SwaggerConfiguration {
 
     @Resource
