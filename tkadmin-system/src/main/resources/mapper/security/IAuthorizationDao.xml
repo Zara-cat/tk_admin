@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tk.modules.security.dao.IAuthorizationDao">
+    <!--userInfo resultMap-->
+    <resultMap id="userInfoMap" type="com.tk.modules.security.entity.UserInfo">
+        <id column="user_id" property="userId"></id>
+        <result column="dept_id" property="deptId"></result>
+        <result column="username" property="username"></result>
+        <result column="salt" property="salt"></result>
+        <result column="password" property="password"></result>
+        <result column="nick_name" property="nickName"></result>
+        <result column="gender" property="gender"></result>
+        <result column="phone" property="phone"></result>
+        <result column="email" property="email"></result>
+        <result column="avatar_name" property="avatarName"></result>
+        <result column="avatar_path" property="avatarPath"></result>
+        <result column="is_admin" property="isAdmin"></result>
+        <result column="enabled" property="enabled"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="update_by" property="updateBy"></result>
+        <result column="pwd_reset_time" property="pwdResetTime"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+    </resultMap>
+    <!--根据用户名查询 sys_user 表 获取用户信息-->
+    <!--Query the sys user table based on the user name to obtain user information-->
+    <select id="findUserInfoByUsername" resultMap="userInfoMap">
+        select user_id,dept_id,username,salt,password,nick_name,gender,phone,email,avatar_name,avatar_path,is_admin,enabled,create_by,update_by,pwd_reset_time,create_time,update_time
+        from sys_user where username = #{username}
+    </select>
+</mapper>

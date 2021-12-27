@@ -47,7 +47,7 @@ public class UserInfo extends BaseEntity implements Serializable {
     // 头像真实路径
     private String avatarPath;
     // 是否为 admin 账号
-    private boolean isAdmin;
+    private Boolean isAdmin;
     // 状态：1启用 、0禁用
     private Long enabled;
     // 修改密码的时间

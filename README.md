@@ -26,6 +26,7 @@ TK - ADMIN 基于 Spring Boot 2.x、Mybatsi、Shiro、JWT、Vue等前沿技术�
 
 ------
 
+- TOKEN 自动刷新
 - 用户管理
 
 ### 项目结构

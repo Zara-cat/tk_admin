@@ -10,6 +10,8 @@
     <artifactId>tkadmin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <!--必须为pom-->
+    <!--git tokens-->
+    <!--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-->
     <packaging>pom</packaging>
 
     <!-- parent指明继承关系，给出被继承的父项目的具体信息-->
@@ -45,6 +47,8 @@
         <mysql.version>8.0.11</mysql.version>
         <!--druid-->
         <druid.version>1.1.22</druid.version>
+        <!--mybatis-->
+        <mybatis.version>2.1.2</mybatis.version>
     </properties>
 
     <!-- 模块说明：这里声明多个子模块 -->
@@ -60,6 +64,12 @@
     <!--控制子模块版本-->
     <dependencyManagement>
         <dependencies>
+            <!--mybatis-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
             <!--工具包-->
             <dependency>
                 <groupId>cn.hutool</groupId>

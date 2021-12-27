@@ -42,7 +42,7 @@ public class JwtRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-     /*   System.out.println("进入 JwtRealm Authentication");
+        System.out.println("进入 JwtRealm Authentication");
         JwtToken jwtToken = (JwtToken)authenticationToken;
         if (jwtToken.getPrincipal() == null){
             throw new AccountException("JWT token 参数异常");
@@ -50,15 +50,14 @@ public class JwtRealm extends AuthorizingRealm {
         return new SimpleAuthenticationInfo(
                 jwtToken,
                 jwtToken.getPrincipal(),
-                getName());*/
-        return null;
+                getName());
     }
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("进入 JwtRealm Authorization");
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        /*SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
-       /* //获取当前用户
+        //获取当前用户
         JwtToken jwtToken = (JwtToken) SecurityUtils.getSubject().getPrincipal();
         System.out.println(jwtToken.getPrincipal());
         //查询数据库获取用户的角色信息
@@ -74,7 +73,8 @@ public class JwtRealm extends AuthorizingRealm {
                     }
                 }
             });
-        }*/
-        return info;
+        }
+        return info;*/
+        return null;
     }
 }

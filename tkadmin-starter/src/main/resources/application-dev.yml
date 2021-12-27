@@ -2,11 +2,12 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-      # 下面为连接池的补充设置，应用到上面所有数据源中
+    url: jdbc:mysql://127.0.0.1:3306/tkadmin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useSSL=false
+    # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
     druid:
       #JDBC配置
-      url: jdbc:mysql://localhost:3306/tkadmin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useSSL=false
+      driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 1111
       initialSize: 5
@@ -74,3 +75,10 @@ jwt:
   # accessToken 私钥，若为空 ，则使用 JwtYmlBean 中的默认
   access-token-secret: SECRET_VALUE
 
+#mybatis配置
+mybatis:
+  #配置SQL映射文件路径
+  mapper-locations: classpath:mapper/*.xml
+  #驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true

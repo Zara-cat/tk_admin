@@ -50,6 +50,7 @@ public class AuthorizationController {
     @ApiOperation(value = "登录授权")
     @PostMapping(value = {"/login"})
     public ResultDTO<Object> login(@Validated @RequestBody AuthUserDTO userDTO, ServletResponse response) {
+        System.out.println("调用登录方法"+userDTO.toString());
         String code = (String) redisUtil.get(userDTO.getUuid());
         //清除验证码
         redisUtil.del(userDTO.getUuid());
@@ -87,6 +88,7 @@ public class AuthorizationController {
     @ApiOperation(value = "获取验证码")
     @GetMapping("/code")
     public ResultDTO<Object> getCode() {
+        System.out.println("调用获取验证码方法");
         // 获取验证码
         Captcha captcha = loginCodeUtil.getCaptcha();
         // 生成uuid

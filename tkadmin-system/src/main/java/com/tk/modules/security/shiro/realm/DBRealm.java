@@ -1,6 +1,8 @@
 package com.tk.modules.security.shiro.realm;
 
 
+import com.tk.modules.security.entity.UserInfo;
+import com.tk.modules.security.service.IAuthorizationService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -25,6 +27,8 @@ import java.util.List;
  */
 public class DBRealm extends AuthorizingRealm {
 
+    @Autowired
+    private IAuthorizationService iAuthorizationService;
 
     /**
      * 限定这个 Realm 只处理 UsernamePasswordToken
@@ -40,34 +44,25 @@ public class DBRealm extends AuthorizingRealm {
     //认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("进入DBRealm Authentication");
-/*        // 查询数据库，将获取到的用户安全数据封装返回
+        // 查询数据库，将获取到的用户安全数据封装返回
         String username = authenticationToken.getPrincipal().toString();
-        //查询数据库获取用户信息。关于 service 对象 可以手动注入也可以依赖注入
-        User user = service.findUserByUsername(username);
-        if (!ObjectUtils.isEmpty(user)) {
-            if (user.getLocked() == 1) {
+        // 查询数据库获取用户信息。关于 service 对象 可以手动注入也可以依赖注入
+        UserInfo userInfo = iAuthorizationService.getUserInfoByUserName(username);
+        if (!ObjectUtils.isEmpty(userInfo)){
+            if (userInfo.getEnabled() == 0){
                 throw new LockedAccountException();
-            } else {
-                *//**
-                 * 将获取到的用户数据封装成 AuthenticationInfo 对象返回，此处封装为 SimpleAuthenticationInfo 对象。
-                 *  参数1. 认证的实体信息，可以是从数据库中获取到的用户实体类对象或者用户名
-                 *  参数2. 查询获取到的登录密码
-                 *  参数3. 盐值
-                 *  参数4. 当前 Realm 对象的名称，直接调用父类的 getName() 方法即可
-                 *//*
+            }else {
                 SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
-                        user,
-                        user.getPassword(),
-                        ByteSource.Util.bytes(user.getSalt()),
+                        userInfo,
+                        userInfo.getPassword(),
+                        ByteSource.Util.bytes(userInfo.getSalt()),
                         this.getName()
                 );
                 return info;
             }
-        } else {
+        }else {
             throw new UnknownAccountException();
-        }*/
-        return null;
+        }
     }
 
     //授权
