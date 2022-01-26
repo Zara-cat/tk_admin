@@ -11,7 +11,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <!--必须为pom-->
     <!--git tokens-->
-    <!--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-->
+    <!--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-->
     <packaging>pom</packaging>
 
     <!-- parent指明继承关系，给出被继承的父项目的具体信息-->
