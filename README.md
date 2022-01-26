@@ -25,7 +25,7 @@ TK - ADMIN 基于 Spring Boot 2.x、Mybatsi、Shiro、JWT、Vue等前沿技术�
 
 ------
 
-- 谁用最新的技术栈
+- 使用最新的技术栈
 - 前后端统一异常拦截处理，统一输出异常，避免繁琐的判断
 - 支持在线用户管理
 
@@ -35,6 +35,17 @@ TK - ADMIN 基于 Spring Boot 2.x、Mybatsi、Shiro、JWT、Vue等前沿技术�
 
 - TOKEN 自动刷新
 - 用户管理
+
+### 功能性第三方整合
+
+------
+
+- Redis 缓存数据库
+- PageHelper 分页
+- JWT 无状态Token
+- Swagger 项目文档自动生成
+- Validator 参数验证
+- Dozer bean快速转换
 
 ### 项目结构
 
@@ -53,7 +64,21 @@ TK - ADMIN 基于 Spring Boot 2.x、Mybatsi、Shiro、JWT、Vue等前沿技术�
 
 ```
 -tkadmin-common 公共模块
-	-
+	-aop
+	-base
+		-entity
+		-service
+	-config
+		-dozer
+		-jwt
+		-redis
+		-shiro
+		-swagger
+		-validator
+		-ymlbean
+	-constant
+	-exception
+	-utils
 -eladmin-system 系统核心模块
 -tkadmim-logging 系统日志模块
 -tkadmin-tools 系统第三方工具模块

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tk.modules.system.dao.IRoleDao">
+    <!--dept resultMap-->
+    <resultMap id="roleMap" type="com.tk.modules.system.entity.Role">
+        <result column="role_id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="level" property="level"></result>
+        <result column="description" property="description"></result>
+        <result column="data_scope" property="dataScope"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="update_by" property="updateBy"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+    </resultMap>
+    <!--根据用户名查询用户对应的角色集合-->
+    <select id="findRolesByUserName" resultMap="roleMap">
+        select r.role_id,r.name,r.level,r.description,r.data_scope,r.create_by,r.update_by,r.create_time,r.update_time
+        from sys_users_roles ur
+        LEFT JOIN sys_role r on ur.role_id = r.role_id
+        LEFT JOIN sys_user u on ur.user_id = u.user_id
+        WHERE u.username = #{username}
+    </select>
+</mapper>

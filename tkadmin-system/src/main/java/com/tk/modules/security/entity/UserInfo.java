@@ -25,7 +25,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class UserInfo extends BaseEntity implements Serializable {
     // ID
-    private Long userId;
+    private Long id;
     // 部门id
     private Long deptId;
     // 用户名

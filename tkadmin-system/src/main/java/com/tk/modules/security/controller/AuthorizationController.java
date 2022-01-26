@@ -1,10 +1,14 @@
 package com.tk.modules.security.controller;
 
 import cn.hutool.core.util.IdUtil;
+import com.tk.config.jwt.JwtToken;
 import com.tk.config.jwt.JwtUtils;
 import com.tk.config.ymlbean.login.LoginCodeEnum;
 import com.tk.constant.SysJWTConstant;
 import com.tk.modules.security.dto.AuthUserDTO;
+import com.tk.modules.security.entity.UserInfo;
+import com.tk.modules.security.service.IUserDetailsService;
+import com.tk.modules.security.vo.LoadUserVo;
 import com.tk.utils.code.LoginCodeUtil;
 import com.tk.utils.enums.ExecutionState;
 import com.tk.utils.redis.RedisUtil;
@@ -45,12 +49,14 @@ public class AuthorizationController {
     private LoginCodeUtil loginCodeUtil;
 
     @Autowired
+    private IUserDetailsService iUserDetailsService;
+
+    @Autowired
     private RedisUtil redisUtil;
 
     @ApiOperation(value = "登录授权")
     @PostMapping(value = {"/login"})
     public ResultDTO<Object> login(@Validated @RequestBody AuthUserDTO userDTO, ServletResponse response) {
-        System.out.println("调用登录方法"+userDTO.toString());
         String code = (String) redisUtil.get(userDTO.getUuid());
         //清除验证码
         redisUtil.del(userDTO.getUuid());
@@ -64,6 +70,8 @@ public class AuthorizationController {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(usernamePasswordToken);
+            UserInfo userInfo = (UserInfo) subject.getPrincipal();
+            LoadUserVo loadUserVo = iUserDetailsService.loadUserByUserName(userInfo.getUsername());
             // 登录成功，签发 JWT token
             long currentTimeMillis = System.currentTimeMillis();
             String jwtToken = JwtUtils.sign(userDTO.getUsername(), JwtUtils.SECRET, currentTimeMillis);
@@ -72,7 +80,7 @@ public class AuthorizationController {
             // redis 存储 key:username value:当前时间搓
             redisUtil.set(SysJWTConstant.REFRESHTOKEN_PRE + userDTO.getUsername(), currentTimeMillis, SysJWTConstant.REFRESHTOKEN_TIME);
             // 这里是登录成功后需要返回的客户端信息
-            return Responder.successful(ExecutionState.USER_LOGIN_SUCCESS);
+            return Responder.successful(loadUserVo);
         } catch (UnknownAccountException e) { //账号不存在
             return Responder.failure(ExecutionState.USER_ACCOUNT_NOT_FOUND);
         } catch (IncorrectCredentialsException e) { //账号与密码不匹配
@@ -88,7 +96,6 @@ public class AuthorizationController {
     @ApiOperation(value = "获取验证码")
     @GetMapping("/code")
     public ResultDTO<Object> getCode() {
-        System.out.println("调用获取验证码方法");
         // 获取验证码
         Captcha captcha = loginCodeUtil.getCaptcha();
         // 生成uuid
@@ -106,5 +113,21 @@ public class AuthorizationController {
             put("uuid", uuid);
         }};
         return Responder.successful(imgResult);
+    }
+
+    @ApiOperation(value = "获取用户信息")
+    @GetMapping("/info")
+    public ResultDTO<Object> getUserInfo(){
+        JwtToken principal = (JwtToken) SecurityUtils.getSubject().getPrincipal();
+        LoadUserVo loadUserVo = iUserDetailsService.loadUserByUserName(principal.getPrincipal().toString());
+        return Responder.successful(loadUserVo);
+    }
+
+    @ApiOperation(value = "退出登录")
+    @DeleteMapping("/logout")
+    public ResultDTO<Object> logout(){
+        JwtToken principal = (JwtToken) SecurityUtils.getSubject().getPrincipal();
+        redisUtil.del(SysJWTConstant.REFRESHTOKEN_PRE +principal.getPrincipal().toString());
+        return Responder.successful();
     }
 }

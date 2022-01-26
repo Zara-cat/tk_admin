@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tk.modules.system.dao.IDeptDao">
+    <!--dept resultMap-->
+    <resultMap id="deptMap" type="com.tk.modules.system.entity.Dept">
+        <result column="dept_id" property="id"></result>
+        <result column="pid" property="pid"></result>
+        <result column="sub_count" property="subCount"></result>
+        <result column="name" property="name"></result>
+        <result column="dept_sort" property="deptSort"></result>
+        <result column="enabled" property="enabled"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="update_by" property="updateBy"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+    </resultMap>
+    <!--根据角色 id 查询部门集合-->
+    <select id="selectDeptByRoleId" resultMap="deptMap">
+        select srd.dept_id,srd.pid,srd.sub_count,srd.name,srd.dept_sort,srd.enabled
+        from sys_roles_depts srd
+        left join sys_dept sd
+        on srd.dept_id = sd.dept_id
+        where  srd.role_id = #{roleId}
+    </select>
+    <!--据 pid 查询部门-->
+    <select id="selectDeptByPid" resultMap="deptMap">
+        select dept_id,pid,sub_count,name,dept_sort,enabled from sys_dept where pid = #{pid}
+    </select>
+</mapper>

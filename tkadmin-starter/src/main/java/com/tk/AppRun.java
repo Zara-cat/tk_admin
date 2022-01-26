@@ -10,14 +10,24 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author : [Zara-cat]
+ * @version : [v1.0]
+ * @className : AppRun
+ * @description : [描述说明该类的功能]
+ * @createTime : [2022/1/26 22:34]
+ * @updateUser : [Zara-cat]
+ * @updateTime : [2022/1/26 22:34]
+ * @updateRemark : [描述说明本次修改内容]
+ */
 @RestController
 @SpringBootApplication
 @Api(tags = "启动：启动测试接口")
-public class TkadminStarterApplication {
+public class AppRun {
     @Autowired
     LoginCodeUtil loginCodeUtil;
     public static void main(String[] args) {
-        SpringApplication.run(TkadminStarterApplication.class, args);
+        SpringApplication.run(AppRun.class, args);
     }
 
     // 用来测试访问

@@ -2,14 +2,15 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/tkadmin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/tkadmin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: "1111"
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
     druid:
       #JDBC配置
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 1111
+
       initialSize: 5
       minIdle: 5
       maxActive: 20
@@ -78,7 +79,14 @@ jwt:
 #mybatis配置
 mybatis:
   #配置SQL映射文件路径
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*/*.xml
   #驼峰命名
   configuration:
     map-underscore-to-camel-case: true
+
+# dozer:
+dozer:
+  # 指定 Dozer 的映射配置文件位置
+  mapping-files:
+    - classpath:dozer/global-dozer.xml
+    - classpath:dozer/bean-mappings.xml

@@ -42,7 +42,7 @@ public class JwtRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("进入 JwtRealm Authentication");
+       // System.out.println("进入 JwtRealm Authentication");
         JwtToken jwtToken = (JwtToken)authenticationToken;
         if (jwtToken.getPrincipal() == null){
             throw new AccountException("JWT token 参数异常");

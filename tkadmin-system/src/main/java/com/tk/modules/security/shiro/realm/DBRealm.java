@@ -3,6 +3,7 @@ package com.tk.modules.security.shiro.realm;
 
 import com.tk.modules.security.entity.UserInfo;
 import com.tk.modules.security.service.IAuthorizationService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -10,10 +11,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
-import java.util.List;
 
 /**
  * @author : [Zara-cat]
@@ -52,6 +51,7 @@ public class DBRealm extends AuthorizingRealm {
             if (userInfo.getEnabled() == 0){
                 throw new LockedAccountException();
             }else {
+                //构建vo 对象
                 SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
                         userInfo,
                         userInfo.getPassword(),

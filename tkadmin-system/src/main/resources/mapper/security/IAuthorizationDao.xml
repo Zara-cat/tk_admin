@@ -3,7 +3,7 @@
 <mapper namespace="com.tk.modules.security.dao.IAuthorizationDao">
     <!--userInfo resultMap-->
     <resultMap id="userInfoMap" type="com.tk.modules.security.entity.UserInfo">
-        <id column="user_id" property="userId"></id>
+        <id column="user_id" property="id"></id>
         <result column="dept_id" property="deptId"></result>
         <result column="username" property="username"></result>
         <result column="salt" property="salt"></result>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tk.modules.security.dao.IUserDetailsDao">
+    <!--userInfo resultMap-->
+    <resultMap id="userDetailedInformationMap" type="com.tk.modules.security.service.dto.UserDetailedInformation">
+        <id column="user_id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="nick_name" property="nickName"></result>
+        <result column="gender" property="gender"></result>
+        <result column="phone" property="phone"></result>
+        <result column="email" property="email"></result>
+        <result column="avatar_name" property="avatarName"></result>
+        <result column="avatar_path" property="avatarPath"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="update_by" property="updateBy"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+        <!--一对一部门-->
+        <association property="dept" javaType="com.tk.modules.system.entity.Dept">
+            <result column="dept_id" property="id"></result>
+            <result column="pid" property="pid"></result>
+            <result column="sub_count" property="subCount"></result>
+            <result column="dept_sort" property="deptSort"></result>
+            <result column="dept_name" property="name"></result>
+            <result column="enabled" property="enabled"></result>
+            <result column="create_by" property="createBy"></result>
+            <result column="update_by" property="updateBy"></result>
+            <result column="create_time" property="createTime"></result>
+            <result column="update_time" property="updateTime"></result>
+        </association>
+        <!--一对多角色-->
+        <collection property="roles" ofType="com.tk.modules.system.entity.Role">
+            <result column="role_id" property="id"></result>
+            <result column="role_name" property="name"></result>
+            <result column="level" property="level"></result>
+            <result column="description" property="description"></result>
+            <result column="data_scope" property="dataScope"></result>
+            <result column="create_by" property="createBy"></result>
+            <result column="update_by" property="updateBy"></result>
+            <result column="create_time" property="createTime"></result>
+            <result column="update_time" property="updateTime"></result>
+        </collection>
+        <!--一对多岗位-->
+        <collection property="jobs" ofType="com.tk.modules.system.entity.Job">
+            <result column="job_id" property="id"></result>
+            <result column="job_name" property="name"></result>
+            <result column="enabled" property="enabled"></result>
+            <result column="job_sort" property="jobSort"></result>
+            <result column="create_by" property="createBy"></result>
+            <result column="update_by" property="updateBy"></result>
+            <result column="create_time" property="createTime"></result>
+            <result column="update_time" property="updateTime"></result>
+        </collection>
+    </resultMap>
+    <select id="getUserDetailsByUsername" resultMap="userDetailedInformationMap">
+        select
+            u.*,
+            j.name as 'job_name',j.job_id,
+            d.name as 'dept_name',d.dept_id,
+            r.name as 'role_name',r.role_id,r.level,r.data_scope
+        from sys_user u
+        LEFT JOIN sys_users_jobs uj on u.user_id = uj.user_id
+        LEFT JOIN sys_job  j on uj.job_id = j.job_id
+        LEFT JOIN sys_dept d on u.dept_id = d.dept_id
+        LEFT JOIN sys_users_roles ur on u.user_id = ur.user_id
+        LEFT JOIN sys_role r on ur.role_id = r.role_id
+        where u.username = #{username}
+    </select>
+</mapper>

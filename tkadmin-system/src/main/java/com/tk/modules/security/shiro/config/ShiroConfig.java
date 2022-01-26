@@ -188,8 +188,14 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilters(filterMap);
 
         LinkedHashMap<String,String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        filterChainDefinitionMap.put("/auth/login","anon"); // 可匿名访问
-        filterChainDefinitionMap.put("/auth/code","anon"); // 可匿名访问
+        filterChainDefinitionMap.put("/auth/login","anon"); // 登录接口可匿名访问
+        filterChainDefinitionMap.put("/auth/code","anon"); // 获取验证码可匿名访问
+        filterChainDefinitionMap.put("/swagger-ui.html","anon");// swagger 可匿名访问
+        filterChainDefinitionMap.put("/swagger/**","anon");
+        filterChainDefinitionMap.put("/webjars/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/**","anon");
+        filterChainDefinitionMap.put("/v2/**","anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/logout","logout");// 推出登录
         filterChainDefinitionMap.put("/**","jwtTokenFilter,authc");//需要登录才能访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

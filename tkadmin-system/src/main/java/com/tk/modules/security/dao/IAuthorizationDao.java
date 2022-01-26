@@ -2,6 +2,7 @@ package com.tk.modules.security.dao;
 
 import com.tk.modules.security.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author : [Zara-cat]
@@ -20,5 +21,6 @@ public interface IAuthorizationDao {
      * @param username
      * @return
      */
-    UserInfo findUserInfoByUsername(@Mapper String username);
+    UserInfo findUserInfoByUsername(@Param("username") String username);
+
 }

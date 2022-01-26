@@ -35,7 +35,7 @@ public class JwtUtils {
     // 请求头
     public static final String AUTH_HEADER = SysJWTConstant.ACCESS_AUTH_HEADER;
     static {
-        System.out.println(EXPIRE_TIME + " "+AUTH_HEADER + " "+ SECRET);
+       // System.out.println(EXPIRE_TIME + " "+AUTH_HEADER + " "+ SECRET);
     }
     /**
      * 生成签名
